@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .fact-container {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .social-buttons {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fact-container" id="fact"></div>
+        <button onclick="updateFact()">New Fact</button>
+        <div class="social-buttons">
+            <button onclick="shareOnTwitter()">Share on Twitter</button>
+            <button onclick="shareOnLinkedIn()">Share on LinkedIn</button>
+        </div>
+    </div>
+
+    <script>
+        const facts = [
+            "Crocodiles can hold their breath underwater for over an hour.",
+            "Crocodiles are excellent swimmers.",
+            "Crocodiles have a powerful bite force.",
+            "Crocodiles have existed for millions of years."
+        ];
+
+        function updateFact() {
+            const factContainer = document.getElementById('fact');
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const fact = facts[randomIndex];
+            factContainer.textContent = fact;
+            adaptColorScheme(fact);
+        }
+
+        function adaptColorScheme(fact) {
+            const body = document.body;
+            if (fact.includes("water")) {
+                body.style.backgroundColor = "#ADD8E6"; // Light Blue
+            } else {
+                body.style.backgroundColor = "#f0f0f0"; // Default
+            }
+        }
+
+        function shareOnTwitter() {
+            const fact = document.getElementById('fact').textContent;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(fact)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const fact = document.getElementById('fact').textContent;
+            const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fact)}`;
+            window.open(url, '_blank');
+        }
+
+        updateFact(); // Initial fact display
+    </script>
+</body>
+</html>
